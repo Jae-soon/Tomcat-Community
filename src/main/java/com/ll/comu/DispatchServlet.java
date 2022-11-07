@@ -12,6 +12,18 @@ import java.io.IOException;
 public class DispatchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().append("Work?");
+        Rq rq = new Rq(req, resp);
+
+        MemberController memberController = new MemberController();
+        ArticleController articleController = new ArticleController();
+
+        String url = req.getRequestURI();
+
+        switch (url) {
+            case "usr/article/list":
+                articleController.showList(rq);
+            case "usr/member/login":
+                memberController.showLogin(rq);
+        }
     }
 }
