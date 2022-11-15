@@ -1,5 +1,7 @@
-package com.ll.comu;
+package com.ll.comu.global;
 
+import com.ll.comu.article.controller.ArticleController;
+import com.ll.comu.member.controller.MemberController;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,9 +22,9 @@ public class DispatchServlet extends HttpServlet {
         String url = req.getRequestURI();
 
         switch (url) {
-            case "usr/article/list":
+            case "/usr/article/list":
                 articleController.showList(rq);
-            case "usr/member/login":
+            case "/usr/member/login":
                 memberController.showLogin(rq);
         }
     }
