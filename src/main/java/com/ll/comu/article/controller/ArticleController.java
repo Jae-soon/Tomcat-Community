@@ -20,4 +20,7 @@ public class ArticleController {
     }
 
 
+    public void showWrite(Rq rq) {
+        rq.view("usr/article/write");
+    }
 }
