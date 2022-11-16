@@ -24,7 +24,7 @@
 
 <h1>게시물 작성</h1>
 
-<form onsubmit="Article_Write_Check(this); return false;">
+<form method="POST" onsubmit="Article_Write_Check(this); return false;">
     <div>
         <span>제목</span>
         <div>
