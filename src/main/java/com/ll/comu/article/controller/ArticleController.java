@@ -1,5 +1,6 @@
 package com.ll.comu.article.controller;
 
+import com.ll.comu.article.service.ArticleService;
 import com.ll.comu.global.Rq;
 import com.ll.comu.article.dto.ArticleDto;
 
@@ -7,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleController {
+    private ArticleService articleService;
+
+    public ArticleController() {
+        articleService = new ArticleService();
+    }
     public void showList(Rq rq) {
         List<ArticleDto> articleDtos = new ArrayList<>();
         articleDtos.add(new ArticleDto(5, "제목 5", "내용 5"));
@@ -29,7 +35,7 @@ public class ArticleController {
         String title = rq.getParam("title", "");
         String body = rq.getParam("body", "");
 
-        rq.appendBody("<div>title : %s</div>".formatted(title));
-        rq.appendBody("<div>body : %s</div>".formatted(body));
+        long id = articleService.write(title, body);
+        rq.appendBody("%d번 게시물이 생성되었습니다.".formatted(id));
     }
 }

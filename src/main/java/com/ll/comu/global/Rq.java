@@ -62,7 +62,6 @@ public class Rq {
     }
 
     public void view(String path) {
-        System.out.println(path);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/jsp/" + path + ".jsp");
         try {
             requestDispatcher.forward(req, resp);

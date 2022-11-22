@@ -2,13 +2,10 @@ package com.ll.comu.global;
 
 import com.ll.comu.article.controller.ArticleController;
 import com.ll.comu.member.controller.MemberController;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
 
 @WebServlet("/usr/*")
 public class DispatchServlet extends HttpServlet {
@@ -18,6 +15,7 @@ public class DispatchServlet extends HttpServlet {
 
         MemberController memberController = new MemberController();
         ArticleController articleController = new ArticleController();
+
 
         switch (rq.getMethod()) {
             case "GET":
@@ -32,12 +30,14 @@ public class DispatchServlet extends HttpServlet {
                         articleController.showWrite(rq);
                         break;
                 }
+                break;
             case "POST":
                 switch (rq.getPath()) {
                     case "/usr/article/write":
                         articleController.doWrite(rq);
                         break;
                 }
+                break;
         }
     }
 
