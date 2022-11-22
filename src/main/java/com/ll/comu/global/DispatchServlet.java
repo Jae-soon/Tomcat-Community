@@ -19,14 +19,14 @@ public class DispatchServlet extends HttpServlet {
 
         switch (rq.getMethod()) {
             case "GET":
-                switch (rq.getPath()) {
+                switch (rq.getActionPath()) {
                     case "/usr/article/list" -> articleController.showList(rq);
                     case "/usr/member/login" -> memberController.showLogin(rq);
                     case "/usr/article/write" -> articleController.showWrite(rq);
                 }
                 break;
             case "POST":
-                switch (rq.getPath()) {
+                switch (rq.getActionPath()) {
                     case "/usr/article/write" -> articleController.doWrite(rq);
                 }
                 break;
