@@ -13,7 +13,7 @@ public class AppTest {
     }
 
     @Test
-    void ObjectMapper_Test() throws JsonProcessingException {
+    void ObjectMapper_Test_toJSON() throws JsonProcessingException {
         ArticleDto articleDto = new ArticleDto(1, "제목", "내용");
 
         String jsonStr = Ut.json.toStr(articleDto, "");
@@ -21,5 +21,15 @@ public class AppTest {
         assertThat(jsonStr).isEqualTo("""
                 {"id":1,"title":"제목","content":"내용"}
                 """.trim());
+    }
+
+    @Test
+    void ObjectMapper_Test_toObj() {
+        ArticleDto articleDtoOrigin = new ArticleDto(1, "제목", "내용");
+        String jsonStr = Ut.json.toStr(articleDtoOrigin, "");
+
+        ArticleDto articleDtoFromJson = Ut.json.toObj(jsonStr, ArticleDto.class, null);
+
+        assertThat(articleDtoOrigin).isEqualTo(articleDtoFromJson);
     }
 }
