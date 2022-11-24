@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ll.comu.article.dto.ArticleDto;
 import com.ll.comu.global.util.Ut;
 import org.junit.jupiter.api.Test;
@@ -59,5 +60,20 @@ public class AppTest {
         ArticleDto articleDtoFromJson = Ut.json.toObj(jsonStr, ArticleDto.class, null);
 
         assertThat(articleDtoOrigin).isEqualTo(articleDtoFromJson);
+    }
+
+    @Test
+    void ObjectMapper__jsonStrToArticleDtoList() {
+        List<ArticleDto> articleDtos = new ArrayList<>();
+        articleDtos.add(new ArticleDto(1, "제목1", "내용1"));
+        articleDtos.add(new ArticleDto(2, "제목2", "내용2"));
+
+        String jsonStr = Ut.json.toStr(articleDtos, "");
+
+//        typeReference는 Generic Class에서 Java형식을 가져오는 유틸리티이다.
+        List<ArticleDto> articleDtosFromJson = Ut.json.toObj(jsonStr, new TypeReference<>() {
+        }, null);
+
+        assertThat(articleDtosFromJson).isEqualTo(articleDtos);
     }
 }
