@@ -51,12 +51,19 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/article/delete" -> articleController.doDelete(rq);
                     case "/usr/chat/deleteRoom" -> chatController.deleteRoom(rq);
                     case "/usr/chat/deleteMessage" -> chatController.deleteMessage(rq);
+                    case "/usr/chat/deleteMessageAjax" -> chatController.deleteMessageAjax(rq);
                 }
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        doGet(req, resp);
+    }
+
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
         doGet(req, resp);
     }
 }
