@@ -6,8 +6,6 @@
     List<ArticleDto> articles = (List<ArticleDto>)request.getAttribute("articles");
 %>
 
-<h1>게시물 리스트</h1>
-
 <%@ include file="../common/head.jsp"%>
 
 <section>
