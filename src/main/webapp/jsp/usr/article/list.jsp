@@ -8,7 +8,7 @@
 
 <h1>게시물 리스트</h1>
 
-<script src="https://cdn.tailwindcss.com"></script>
+<%@ include file="../common/head.jsp"%>
 
 <section>
     <div class="container px-3 mx-auto">
@@ -27,3 +27,6 @@
         </ul>
     </div>
 </section>
+
+
+<%@ include file="../common/foot.jsp"%>

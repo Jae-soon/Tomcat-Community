@@ -96,10 +96,10 @@ public class ArticleController {
     public void doModify(Rq rq) {
         long id = rq.getLongPathValueByIndex(1, 0);
         String title = rq.getParam("title", "");
-        String body = rq.getParam("content", "");
+        String content = rq.getParam("content", "");
 
         rq.appendBody("<div>id : %d</div>".formatted(id));
         rq.appendBody("<div>title : %s</div>".formatted(title));
-        rq.appendBody("<div>content : %s</div>".formatted(body));
+        rq.appendBody("<div>content : %s</div>".formatted(content));
     }
 }

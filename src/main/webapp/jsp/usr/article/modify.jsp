@@ -15,10 +15,10 @@
             form.title.focus();
             return;
         }
-        form.body.value = form.body.value.trim();
-        if ( form.body.value.length == 0 ) {
+        form.content.value = form.content.value.trim();
+        if ( form.content.value.length == 0 ) {
             alert('내용을 입력해주세요.');
-            form.body.focus();
+            form.content.focus();
             return;
         }
         form.submit();
@@ -43,7 +43,7 @@
     <div>
         <span>내용</span>
         <div>
-            <input name="body" type="text" maxlength="300" placeholder="내용을 입력해주세요." value="<%=article.getContent()%>" />
+            <input name="content" type="text" maxlength="300" placeholder="내용을 입력해주세요." value="<%=article.getContent()%>" />
         </div>
     </div>
 
