@@ -24,6 +24,7 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/member/login" -> memberController.showLogin(rq);
                     case "/usr/article/write" -> articleController.showWrite(rq);
                     case "/usr/article/detail" -> articleController.showDetail(rq);
+                    case "/usr/article/delete" -> articleController.doDelete(rq);
                 }
                 break;
             case "POST":
