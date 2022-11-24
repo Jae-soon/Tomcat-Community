@@ -49,12 +49,16 @@ public class Rq {
         }
     }
 
-    public void appendBody(String str) {
+    public void print(String str) {
         try {
             resp.getWriter().append(str);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void println(String str) {
+        print(str + "\n");
     }
 
     public void setAttribute(String name, Object value) {
