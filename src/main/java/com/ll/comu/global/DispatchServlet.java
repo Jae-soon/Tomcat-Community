@@ -31,6 +31,7 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/chat/createRoom" -> chatController.showCreateRoom(rq);
                     case "/usr/chat/roomList" -> chatController.showRoomList(rq);
                     case "/usr/chat/modifyRoom" -> chatController.showModifyRoom(rq);
+                    case "/usr/chat/room" -> chatController.showRoom(rq);
                 }
                 break;
             case "POST":
@@ -39,6 +40,7 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/article/modify" -> articleController.doModify(rq);
                     case "/usr/chat/createRoom" -> chatController.doCreateRoom(rq);
                     case "/usr/chat/modifyRoom" -> chatController.doModifyRoom(rq);
+                    case "/usr/chat/writeMessage" -> chatController.doWriteMessage(rq);
                 }
                 break;
             case "DELETE":
