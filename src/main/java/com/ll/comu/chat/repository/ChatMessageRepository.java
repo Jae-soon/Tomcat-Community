@@ -20,7 +20,7 @@ public class ChatMessageRepository {
 
     private static void makeTestData() {
         IntStream.rangeClosed(1, 10).forEach(roomId -> {
-            IntStream.rangeClosed(1, 10).forEach(id -> {
+            IntStream.rangeClosed(1, 2).forEach(id -> {
                 String content = "메세지 %d".formatted(id);
                 write(roomId, content);
             });
