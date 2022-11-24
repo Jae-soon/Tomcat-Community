@@ -2,9 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.ll.comu.article.dto.ArticleDto" %>
 
-<%
-    List<ArticleDto> articles = (List<ArticleDto>)request.getAttribute("articles");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="../common/head.jsp"%>
 
@@ -14,15 +12,16 @@
 
         <ul class="mt-5">
 <%--            for문을 사용하면 el태그를 사용할 수 없음--%>
-            <% for ( ArticleDto article : articles ) { %>
+<%--            대체로 jstl의 foreach 사용--%>
+            <c:forEach items="${articles}" var="article">
             <li class="flex">
-                <a class="w-[40px] hover:underline hover:text-[red]" href="/usr/article/detail/<%=article.getId()%>"><%=article.getId()%></a>
+                <a class="w-[40px] hover:underline hover:text-[red]" href="/usr/article/detail/${article.id}">${article.id}</a>
                 <!-- flex-grow : 성장성 1 -->
-                <a class="flex-grow hover:underline hover:text-[red]" href="/usr/article/detail/<%=article.getId()%>"><%=article.getTitle()%></a>
-                <a onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" class="hover:underline hover:text-[red] mr-2" href="/usr/article/delete/<%=article.getId()%>">삭제</a>
-                <a class="hover:underline hover:text-[red]" href="/usr/article/modify/<%=article.getId()%>">수정</a>
+                <a class="flex-grow hover:underline hover:text-[red]" href="/usr/article/detail/${article.id}">${article.title}</a>
+                <a onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" class="hover:underline hover:text-[red] mr-2" href="/usr/article/delete/${article.id}">삭제</a>
+                <a class="hover:underline hover:text-[red]" href="/usr/article/modify/${article.id}">수정</a>
             </li>
-            <% } %>
+            </c:forEach>
         </ul>
     </div>
 </section>
