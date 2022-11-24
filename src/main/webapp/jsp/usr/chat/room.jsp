@@ -41,10 +41,35 @@
                     alert(data.msg);
                 }
 
-                $(btn).parent().remove();
+                $(btn).closest('li').remove();
             },
             dataType: 'json'
         });
+    }
+
+    function ChatMessages__modify(form) {
+        form.content.value = form.content.value.trim();
+        if ( form.content.value.length == 0 ) {
+            alert('내용을 입력해주세요.');
+            form.content.focus();
+            return;
+        }
+
+        $.post(
+            `/usr/chat/modifyMessageAjax/\${form.id.value}`, // 주소, action
+            {
+                content: form.content.value
+            },
+            function(data) {
+                if ( data.msg ) {
+                    alert(data.msg);
+                }
+
+                const $li = $(form).closest('li');
+                $li.find('.message-list__message-content').empty().append(form.content.value);
+            },
+            'json' // 받은 데이터를 json 으로 해석하겠다.
+        );
     }
 
     function ChatMessages__loadMore() {
@@ -55,13 +80,20 @@
                 for ( const index in messages ) {
                     const message = messages[index];
                     const html = `
-                    <li class="flex">
-                        <span>메세지 \${message.id} :</span>
-                        &nbsp;
-                        <span>\${message.content}</span>
-                        &nbsp;
-                        <a onclick="if ( confirm('정말로 삭제하시겠습니까?') ) ChatMessages__remove(\${message.id}, this); return false;" class="cursor-pointer hover:underline hover:text-[red] mr-2">삭제</a>
-                    </li>
+                        <li>
+                            <div class="flex">
+                                <span>메세지 \${message.id} :</span>
+                                &nbsp;
+                                <span class="message-list__message-content">\${message.content}</span>
+                                &nbsp;
+                                <a onclick="if ( confirm('정말로 삭제하시겠습니까?') ) ChatMessages__remove(\${message.id}, this); return false;" class="cursor-pointer hover:underline hover:text-[red] mr-2">삭제</a>
+                            </div>
+                            <form onsubmit="ChatMessages__modify(this); return false;">
+                                <input type="hidden" name="id" value="\${message.id}" />
+                                <input type="text" name="content" class="input input-bordered" placeholder="내용" value="\${message.content}" />
+                                <button type="submit" class="btn btn-secondary btn-outline">수정</button>
+                            </form>
+                        </li>
                     `;
                     $('.chat-messages').append(html);
                 }
@@ -86,7 +118,7 @@
             ${room.content}
         </div>
 
-        <form onsubmit="ChatMessageSave__submitForm(this); return false;" method="POST" action="/usr/chat/writeMessage/${room.id}">
+        <form onsubmit="ChatMessageSave__submitForm(this); return false;" method="POST" action="/usr/chat/modifyMessage/${room.id}">
             <input autofocus name="content" type="text" placeholder="메세지를 입력해주세요." class="input input-bordered" />
             <button type="submit" value="" class="btn btn-outline btn-primary">
                 작성
