@@ -47,6 +47,17 @@
         });
     }
 
+    function ChatMessages__showModify(btn) {
+        const $li = $(btn).closest('li');
+        const $form = $li.find('form');
+        $form.removeClass('hidden');
+    }
+    function ChatMessages__hideModify(btn) {
+        const $li = $(btn).closest('li');
+        const $form = $li.find('form');
+        $form.addClass('hidden');
+    }
+
     function ChatMessages__modify(form) {
         form.content.value = form.content.value.trim();
         if ( form.content.value.length == 0 ) {
@@ -67,6 +78,8 @@
 
                 const $li = $(form).closest('li');
                 $li.find('.message-list__message-content').empty().append(form.content.value);
+
+                ChatMessages__hideModify(form);
             },
             'json' // 받은 데이터를 json 으로 해석하겠다.
         );
@@ -87,11 +100,13 @@
                                 <span class="message-list__message-content">\${message.content}</span>
                                 &nbsp;
                                 <a onclick="if ( confirm('정말로 삭제하시겠습니까?') ) ChatMessages__remove(\${message.id}, this); return false;" class="cursor-pointer hover:underline hover:text-[red] mr-2">삭제</a>
+                                <a onclick="ChatMessages__showModify(this);" class="cursor-pointer hover:underline hover:text-[red]">수정</a>
                             </div>
-                            <form onsubmit="ChatMessages__modify(this); return false;">
+                            <form class="hidden" onsubmit="ChatMessages__modify(this); return false;">
                                 <input type="hidden" name="id" value="\${message.id}" />
                                 <input type="text" name="content" class="input input-bordered" placeholder="내용" value="\${message.content}" />
                                 <button type="submit" class="btn btn-secondary btn-outline">수정</button>
+                                <button type="button" class="btn btn-outline" onclick="ChatMessages__hideModify(this);">수정취소</button>
                             </form>
                         </li>
                     `;
