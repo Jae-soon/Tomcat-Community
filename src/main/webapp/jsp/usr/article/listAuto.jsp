@@ -4,10 +4,30 @@
 <%@ include file="../common/head.jsp"%>
 
 <script>
-    function Article__loadMore() {
-        $('.articles').append(`
-        <li>하하하</li>
-    `);
+    let Articles__lastId = 0;
+
+    function Articles__loadMore() {
+        fetch(`/usr/article/getArticles?fromId=\${Articles__lastId}`)
+            .then(data => data.json())
+            .then(responseData => {
+                const articles = responseData.data;
+                for ( const index in articles ) {
+                    const article = articles[index];
+                    const html = `
+                        <li class="flex">
+                        <a class="w-[40px] hover:underline hover:text-[red]" href="/usr/article/detail/\${article.id}">\${article.id}</a>
+                        <a class="flex-grow hover:underline hover:text-[red]" href="/usr/article/detail/\${article.id}">\${article.title}</a>
+                        <a onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" class="hover:underline hover:text-[red] mr-2" href="/usr/article/delete/\${article.id}?_method=DELETE">삭제</a>
+                        <a class="hover:underline hover:text-[red]" href="/usr/article/modify/\${article.id}">수정</a>
+                    </li>
+                `;
+                    $('.articles').append(html);
+                }
+
+                if ( articles.length > 0 ) {
+                    Articles__lastId = articles[articles.length - 1].id;
+                }
+            });
     }
 </script>
 
@@ -19,10 +39,14 @@
 
         </ul>
 
-        <hr>
+        <hr class="mt-3 mb-3">
 
-        <button class="btn btn-sm" onclick="Article__loadMore();">불러오기</button>
+        <button class="btn btn-sm" onclick="Articles__loadMore();">추가로 불러오기</button>
     </div>
 </section>
+
+<script>
+    Articles__loadMore();
+</script>
 
 <%@ include file="../common/foot.jsp"%>
