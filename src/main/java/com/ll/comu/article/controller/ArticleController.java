@@ -30,6 +30,16 @@ public class ArticleController {
         String title = rq.getParam("title", "");
         String content = rq.getParam("content", "");
 
+        if (title.length() == 0) {
+            rq.historyBack("제목을 입력해주세요.");
+            return;
+        }
+
+        if (content.length() == 0) {
+            rq.historyBack("내용을 입력해주세요.");
+            return;
+        }
+
         long id = articleService.write(title, content);
         rq.replace("/usr/article/detail/%d".formatted(id), "%d번 게시물이 생성 되었습니다.".formatted(id));
     }
