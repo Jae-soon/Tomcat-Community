@@ -11,7 +11,20 @@
             form.content.focus();
             return false;
         }
-        form.submit();
+
+        $.post(
+            '/usr/chat/writeMessageAjax/${room.id}',
+            {
+                content: form.content.value // 폼 내용, input name, value
+            },
+            function(data) { // 콜백 메서드, 통신이 완료된 후, 실행
+            // data.resultCode
+            // data.msg
+            },
+            'json' // 받은 데이터를 json 으로 해석하겠다.
+        );
+        form.content.value = '';
+        form.content.focus();
     }
 </script>
 
@@ -29,7 +42,8 @@
                     <li class="flex">
                         <span>메세지 \${message.id} :</span>
                         &nbsp;
-                        <span>\${message.content}</a>
+                        <span>\${message.content}</span>
+                        &nbsp;
                         <a onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" class="hover:underline hover:text-[red] mr-2" href="/usr/chat/deleteMessage/\${message.id}?_method=DELETE">삭제</a>
                     </li>
                     `;

@@ -211,4 +211,31 @@ public class ChatController {
 
         rq.successJson(chatMessageDtos);
     }
+
+    public void doWriteMessageAjax(Rq rq) {
+        long roomId = rq.getLongPathValueByIndex(1, -1);
+
+        if (roomId == -1) {
+            rq.failJson("채팅방 번호를 입력해주세요.");
+            return;
+        }
+
+        ChatRoomDto chatRoom = chatService.findRoomById(roomId);
+
+        if (chatRoom == null) {
+            rq.failJson("존재하지 않는 채팅방 입니다.");
+            return;
+        }
+
+        String content = rq.getParam("content", "");
+
+        if (content.trim().length() == 0) {
+            rq.historyBack("내용을 입력해주세요.");
+            return;
+        }
+
+        long newChatMessageId = chatService.writeMessage(roomId, content);
+
+        rq.successJson(newChatMessageId);
+    }
 }
