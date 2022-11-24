@@ -6,7 +6,9 @@ import com.ll.comu.article.dto.ArticleDto;
 import com.ll.comu.global.util.Ut;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ArticleController {
     private ArticleService articleService;
@@ -129,6 +131,12 @@ public class ArticleController {
     public void getArticles(Rq rq) {
         List<ArticleDto> articleDtos = articleService.findAll();
 
-        rq.json(articleDtos);
+        Map<String, Object> resultData = new LinkedHashMap<String, Object>();
+
+        resultData.put("resultCode", "S-1");
+        resultData.put("msg", "성공");
+        resultData.put("data", articleDtos);
+
+        rq.json(resultData);
     }
 }
