@@ -125,15 +125,14 @@ public class ChatController {
         }
 
         ChatRoomDto chatRoomDto = chatService.findRoomById(id);
-        List<ChatMessageDto> chatMessageDtos = chatService.findMessagesByRoomId(chatRoomDto.getId());
 
-        if ( chatRoomDto == null ) {
+        if (chatRoomDto == null) {
             rq.historyBack("존재하지 않는 채팅방 입니다.");
             return;
         }
 
         rq.setAttribute("room", chatRoomDto);
-        rq.setAttribute("messages", chatMessageDtos);
+
         rq.view("usr/chat/room");
     }
 
@@ -161,5 +160,26 @@ public class ChatController {
         chatService.writeMessage(roomId, content);
 
         rq.replace("/usr/chat/room/%d".formatted(roomId), "메세지가 등록되었습니다.");
+    }
+
+    public void showRoomMamual(Rq rq) {
+        long id = rq.getLongPathValueByIndex(1, -1);
+
+        if (id == -1) {
+            rq.historyBack("번호를 입력해주세요.");
+            return;
+        }
+
+        ChatRoomDto chatRoomDto = chatService.findRoomById(id);
+        List<ChatMessageDto> chatMessageDtos = chatService.findMessagesByRoomId(chatRoomDto.getId());
+
+        if (chatRoomDto == null) {
+            rq.historyBack("존재하지 않는 채팅방 입니다.");
+            return;
+        }
+        rq.setAttribute("room", chatRoomDto);
+        rq.setAttribute("messages", chatMessageDtos);
+
+        rq.view("usr/chat/roomManual");
     }
 }
