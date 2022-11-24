@@ -1,5 +1,6 @@
 package com.ll.comu.article.controller;
 
+import com.ll.comu.article.dto.ResultData;
 import com.ll.comu.article.service.ArticleService;
 import com.ll.comu.global.Rq;
 import com.ll.comu.article.dto.ArticleDto;
@@ -131,8 +132,6 @@ public class ArticleController {
     public void getArticles(Rq rq) {
         List<ArticleDto> articleDtos = articleService.findAll();
 
-        Map<String, Object> resultData = Ut.mapOf("resultCode", "S-1", "msg", "성공", "data", articleDtos);
-
-        rq.json(resultData);
+        rq.successJson(articleDtos);
     }
 }
