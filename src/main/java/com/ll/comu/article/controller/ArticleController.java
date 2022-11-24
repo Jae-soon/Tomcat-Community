@@ -3,6 +3,7 @@ package com.ll.comu.article.controller;
 import com.ll.comu.article.service.ArticleService;
 import com.ll.comu.global.Rq;
 import com.ll.comu.article.dto.ArticleDto;
+import com.ll.comu.global.util.Ut;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,5 +124,11 @@ public class ArticleController {
         articleService.modify(id, title, content);
 
         rq.replace("/usr/article/detail/%d".formatted(id), "%d번 게시물이 수정되었습니다.".formatted(id));
+    }
+
+    public void getArticles(Rq rq) {
+        List<ArticleDto> articleDtos = articleService.findAll();
+
+        rq.json(articleDtos);
     }
 }
