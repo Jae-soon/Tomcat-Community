@@ -30,4 +30,8 @@ public class ArticleService {
     public void modify(long id, String title, String content) {
         articleRepository.modify(id, title, content);
     }
+
+    public List<ArticleDto> findIdGreaterThan(long fromId) {
+        return articleRepository.findAllIdGreaterThan(fromId);
+    }
 }
