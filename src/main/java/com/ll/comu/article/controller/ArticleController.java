@@ -98,6 +98,8 @@ public class ArticleController {
         String title = rq.getParam("title", "");
         String content = rq.getParam("content", "");
 
+        articleService.modify(id, title, content);
+
         rq.appendBody("<div>id : %d</div>".formatted(id));
         rq.appendBody("<div>title : %s</div>".formatted(title));
         rq.appendBody("<div>content : %s</div>".formatted(content));
