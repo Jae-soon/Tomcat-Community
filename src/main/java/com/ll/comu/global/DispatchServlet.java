@@ -28,8 +28,9 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/article/modify" -> articleController.showModify(rq);
                     case "/usr/article/getArticles" -> articleController.getArticles(rq);
                     case "/usr/article/listAuto" -> articleController.showListAuto(rq);
-                    case "/usr/chat/createRoom" -> chatController.createRoom(rq);
+                    case "/usr/chat/createRoom" -> chatController.showCreateRoom(rq);
                     case "/usr/chat/roomList" -> chatController.showRoomList(rq);
+                    case "/usr/chat/modifyRoom" -> chatController.showModifyRoom(rq);
                 }
                 break;
             case "POST":
@@ -37,6 +38,7 @@ public class DispatchServlet extends HttpServlet {
                     case "/usr/article/write" -> articleController.doWrite(rq);
                     case "/usr/article/modify" -> articleController.doModify(rq);
                     case "/usr/chat/createRoom" -> chatController.doCreateRoom(rq);
+                    case "/usr/chat/modifyRoom" -> chatController.doModifyRoom(rq);
                 }
                 break;
             case "DELETE":

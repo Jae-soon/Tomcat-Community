@@ -47,7 +47,7 @@
                 <a class="hover:underline hover:text-[red]" href="/usr/chat/createRoom">채팅방 생성</a>
             </li>
             <li>
-                <a class="hover:underline hover:text-[red]" href="/usr/chat/list">채팅방 리스트</a>
+                <a class="hover:underline hover:text-[red]" href="/usr/chat/roomList">채팅방 리스트</a>
             </li>
             <li>
                 <a class="hover:underline hover:text-[red]" href="/usr/article/write">게시물 작성</a>
