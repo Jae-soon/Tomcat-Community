@@ -13,13 +13,13 @@
         <div>
             <% if ( article != null ) { %>
             <div>
-                ID : <%=article.getId()%>
+                ID : ${article.id}
             </div>
             <div>
-                TITLE : <%=article.getTitle()%>
+                TITLE : ${article.title}
             </div>
             <div>
-                BODY : <%=article.getContent()%>
+                CONTENT : ${article.content}
             </div>
             <% } %>
         </div>

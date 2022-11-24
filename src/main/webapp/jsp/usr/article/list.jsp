@@ -13,6 +13,7 @@
         <h1 class="font-bold text-lg">게시물 리스트</h1>
 
         <ul class="mt-5">
+<%--            for문을 사용하면 el태그를 사용할 수 없음--%>
             <% for ( ArticleDto article : articles ) { %>
             <li class="flex">
                 <a class="w-[40px] hover:underline hover:text-[red]" href="/usr/article/detail/<%=article.getId()%>"><%=article.getId()%></a>
